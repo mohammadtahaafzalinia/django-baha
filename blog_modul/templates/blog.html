@@ -1,0 +1,176 @@
+{% load thumbnail %}
+{% load render_partial %}
+{% load poll_extras %}
+{% if rtl_fa == False %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+{% render_partial 'link' %}
+
+<body>
+
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Home Section -->
+
+
+
+	<!-- Blog Section -->
+	<div class="page pt-blog" data-simplebar>
+		<section class="container">
+
+			<!-- Section Title -->
+			<div class="header-page mt-70 mob-mt">
+				<h2>بلاگ</h2>
+				<span></span>
+			</div>
+
+			<!-- Blog Row Start -->
+			<div class="row blog-masonry mt-100 mb-50">
+
+				<!-- Blog Item -->
+                {% for blog in blogs %}
+                    {% if blog.blog_preview == True %}
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="blog-item">
+                                    <div class="thumbnail">
+                                        {% thumbnail blog.image "870x870"  crop='center' as im %}
+                                                <a href="{% url 'blog_ditail' blog.slug %}"><img alt="" src="{{ im.url }}"></a>
+                                        {% endthumbnail %}
+
+                                    </div>
+                                    <h4><a href="{% url 'blog_ditail' blog.slug %}">{{ blog.title }}</a></h4>
+                                    <ul>
+                                        <li><a href="#">{{ blog.get_jalali_data }}</a></li>
+                                        <li><a href="{% url 'blog_cat' blog.category.url %}">{{ blog.category }}</a></li>
+                                    </ul>
+                                    <p>{{ blog.short_description }}</p>
+                                    <div class="blog-btn">
+                                        <a href="{% url 'blog_ditail' blog.slug %}" class="btn-st">بیشتر بخوانید</a>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+
+			</div>
+
+			<div class="row mt-60 mb-90">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<a href="{% url 'blog_list' %}" class="btn-st">مشاهده همه مطالب بلاگ</a>
+				</div>
+			</div>
+
+		</section>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+</html>
+{% elif rtl_fa == True %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% render_partial 'link' %}
+
+<body>
+
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Home Section -->
+
+
+
+	<!-- Blog Section -->
+	<div class="page pt-blog" data-simplebar>
+		<section class="container">
+
+			<!-- Section Title -->
+			<div class="header-page mt-70 mob-mt">
+				<h2>blog</h2>
+				<span></span>
+			</div>
+
+			<!-- Blog Row Start -->
+			<div class="row blog-masonry mt-100 mb-50">
+
+				<!-- Blog Item -->
+                {% for blog in blogs %}
+                    {% if blog.blog_preview == True %}
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="blog-item">
+                                    <div class="thumbnail">
+                                        {% thumbnail blog.image "870x870"  crop='center' as im %}
+                                                <a href="{% url 'blog_ditail' blog.slug %}"><img alt="" src="{{ im.url }}"></a>
+                                        {% endthumbnail %}
+
+                                    </div>
+                                    <h4><a href="{% url 'blog_ditail' blog.slug %}">{{ blog.title|trans }}</a></h4>
+                                    <ul>
+                                        <li><a href="#">{{ blog.date }}</a></li>
+                                        <li><a href="{% url 'blog_cat' blog.category.url %}">{{ blog.category.title_category|trans }}</a></li>
+                                    </ul>
+                                    <p>{{ blog.short_description|trans }}</p>
+                                    <div class="blog-btn">
+                                        <a href="{% url 'blog_ditail' blog.slug %}" class="btn-st">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+
+			</div>
+
+			<div class="row mt-60 mb-90">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<a href="{% url 'blog_list' %}" class="btn-st">See all blogs</a>
+				</div>
+			</div>
+
+		</section>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+</html>
+{% endif %}

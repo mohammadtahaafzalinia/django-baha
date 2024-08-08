@@ -1,0 +1,209 @@
+{% load render_partial %}
+{% load thumbnail %}
+{% load poll_extras %}
+{% if rtl_fa == False %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Title -->
+	<title>taha</title>
+
+	<!-- CSS Plugins -->
+	<link rel="stylesheet" href="/static/css/plugins/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/font-awesome.css">
+	<link rel="stylesheet" href="/static/css/plugins/magnific-popup.css">
+	<link rel="stylesheet" href="/static/css/plugins/simplebar.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.carousel.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/jquery.animatedheadline.css">
+{#    <link rel="stylesheet" href="/static/css/video-iframe.css" type="text/css">#}
+	<!-- CSS Base -->
+	<link rel="stylesheet" class="theme-st" href="/static/css/style-dark.css">
+
+	<!-- Settings Style -->
+	<link rel="stylesheet" class="pos-nav" href="/static/css/settings/right-nav.css">
+	<link rel="stylesheet" class="box-bd" href="/static/css/settings/box/box.css">
+	<link rel="stylesheet" class="box-st" href="/static/css/settings/box/circle.css">
+	<link rel="stylesheet" class="box-tl" href="/static/css/settings/title/title.css">
+	<link rel="stylesheet" class="style-cl" href="/static/css/settings/color/green-color.css">
+
+	<link rel="stylesheet" href="/static/setting/style-demo.css">
+
+	<!-- Icon and Color -->
+	<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png">
+	<meta name="theme-color" content="#0e0f10">
+
+</head>
+<body>
+
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Home Section -->
+
+	<!-- Portfolio Section -->
+	<div class="page pt-portfolio" data-simplebar>
+		<section class="container">
+
+			<!-- Section Title -->
+			<div class="header-page mt-70 mob-mt">
+				<h2>نمونه‌کارها</h2>
+				<span></span>
+			</div>
+
+			<!-- Portfolio Filter Row Start -->
+			<div class="row mt-100">
+				<div class="col-lg-12 col-sm-12 portfolio-filter">
+					<ul>
+						<li class="active" data-filter="*">همه</li>
+                        {% for category in categorys %}
+						<li data-filter=".{{ category.url }}">{{ category.title }}</li>
+                        {% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<!-- Portfolio Item Row Start -->
+			<div class="row portfolio-items mt-100 mb-100" >
+            {% for port in ports %}
+				<div class="item col-lg-4 col-sm-6">
+					<figure>
+                        {% thumbnail port.image '600x400' crop='center' as im %}
+                            <img alt="" src="{{ im.url }}">
+                        {% endthumbnail %}
+
+						<figcaption>
+							<h3>{{ port.name_project }}</h3>
+							<p>{{ port.category }}</p><i class="{{ port.icon }}"></i>
+                            {% if port.video.url is not None %}
+                                <a href="{% url 'video' port.slug %}"></a>
+                            {% else %}
+                                <a class="image-link" href="{{ port.image.url}}"></a>
+                            {% endif %}
+
+						</figcaption>
+					</figure>
+				</div>
+
+            {% endfor %}
+
+
+			</div>
+		</section>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+</html>
+{% elif rtl_fa == True %}
+<!DOCTYPE html>
+<html lang="en">
+{% render_partial 'link' %}
+<body>
+
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Home Section -->
+
+	<!-- Portfolio Section -->
+	<div class="page pt-portfolio" data-simplebar  style="position: absolute;margin-right: 21%;">
+		<section class="container">
+
+			<!-- Section Title -->
+			<div class="header-page mt-70 mob-mt">
+				<h2>portfolio</h2>
+				<span></span>
+			</div>
+
+			<!-- Portfolio Filter Row Start -->
+			<div class="row mt-100">
+				<div class="col-lg-12 col-sm-12 portfolio-filter">
+					<ul>
+						<li class="active" data-filter="*">all</li>
+                        {% for category in categorys %}
+						<li data-filter=".{{ category.url }}">{{ category.title.title|trans }}</li>
+                        {% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<!-- Portfolio Item Row Start -->
+			<div class="row portfolio-items mt-100 mb-100">
+            {% for port in ports %}
+				<div class="item col-lg-4 col-sm-6 {{ port.category.url }}">
+					<figure>
+                        {% thumbnail port.image '600x400' crop='center' as im %}
+                            <img alt="" src="{{ im.url }}">
+                        {% endthumbnail %}
+
+						<figcaption>
+							<h3>{{ port.slug|cut_replac}}</h3>
+							<p>{{ port.category.title|trans }}</p><i class="{{ port.icon }}"></i>
+                            {% if port.video.url is not None %}
+                                <a href="{% url 'video' port.slug %}"></a>
+                            {% else %}
+                                <a class="image-link" href="{{ port.image.url}}"></a>
+                            {% endif %}
+
+						</figcaption>
+					</figure>
+				</div>
+
+            {% endfor %}
+
+
+			</div>
+		</section>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+</html>
+{% endif %}

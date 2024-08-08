@@ -1,0 +1,576 @@
+{% load thumbnail %}
+{% load render_partial %}
+{% if rtl_fa == False %}
+{% load poll_extras %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Title -->
+	<title>قالب Baha - قالب شخصی باها</title>
+
+	<!-- CSS Plugins -->
+	<link rel="stylesheet" href="/static/css/plugins/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/font-awesome.css">
+	<link rel="stylesheet" href="/static/css/plugins/magnific-popup.css">
+	<link rel="stylesheet" href="/static/css/plugins/simplebar.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.carousel.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/jquery.animatedheadline.css">
+
+	<!-- CSS Base -->
+	<link rel="stylesheet" class="theme-st" href="/static/css/style-dark.css">
+
+	<!-- Settings Style -->
+	<link rel="stylesheet" class="pos-nav" href="/static/css/settings/right-nav.css">
+	<link rel="stylesheet" class="box-bd" href="/static/css/settings/box/box.css">
+	<link rel="stylesheet" class="box-st" href="/static/css/settings/box/circle.css">
+	<link rel="stylesheet" class="box-tl" href="/static/css/settings/title/title.css">
+	<link rel="stylesheet" class="style-cl" href="/static/css/settings/color/green-color.css">
+
+	<link rel="stylesheet" href="/static/setting/style-demo.css">
+
+	<!-- Icon and Color -->
+	<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png">
+	<meta name="theme-color" content="#0e0f10">
+
+</head>
+
+<body>
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Home Section -->
+
+
+
+	<!-- About Section -->
+	<div class="page pt-about" data-simplebar>
+		<section class="container">
+
+			<!-- Section Title -->
+			<div class="header-page mt-70 mob-mt">
+				<h2>درباره من</h2>
+				<span></span>
+			</div>
+
+			<!-- Personal Info Start -->
+			<div class="row mt-100">
+
+				<!-- Information Block -->
+				<div class="col-lg-12 col-sm-12">
+					<div class="info box-1">
+						<div class="row">
+							<div class="col-lg-3 col-sm-4">
+								<div class="photo">
+                                    {% thumbnail user.image "400x400" quality=50 crop='center' as im %}
+									<img alt="" src="{{ im.url }}">
+                                    {% endthumbnail %}
+								</div>
+							</div>
+							<div class="col-lg-9 col-sm-8">
+								<h4>{{ user.name }}</h4>
+								<div class="loc">
+									<i class="fas fa-map-marked-alt"></i>{{ user.city }},{{ user.country }}
+								</div>
+								<p>{{ user.description }}
+								</p>
+
+							</div>
+
+							<!-- Icon Info -->
+							<div class="col-lg-3 col-sm-4">
+                                <a href="{% url 'resume' %}">
+								<div class="info-icon">
+									<i class="fas fa-award"></i>
+									<div class="desc-icon">
+										<h6>{{ user.experience }}</h6>
+										<p>تجربه</p>
+									</div>
+								</div></a>
+							</div>
+
+							<!-- Icon Info -->
+
+							<div class="col-lg-3 col-sm-4">
+                                <a href="{% url 'portfolio' %}">
+								<div class="info-icon">
+									<i class="fas fa-certificate"></i>
+									<div class="desc-icon">
+										<h6>{{ user.finished }}</h6>
+										<p>اتمام یافته</p>
+									</div>
+								</div></a>
+							</div>
+
+							<!-- Icon Info -->
+							<div class="col-lg-3 col-sm-4">
+                                <a href="{% url 'resume' %}">
+								<div class="info-icon">
+									<i class="fas fa-user-astronaut"></i>
+									<div class="desc-icon">
+										<h6>{{ user.condition }}</h6>
+										<p>آماده</p>
+									</div>
+                                </div></a>
+							</div>
+							<div class="col-lg-3 col-sm-12 pt-50">
+								<a href="{{ user.resume.url }}" class="btn-st">دریافت رزومه</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Interests Row Start -->
+			<div class="row mt-100">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>علایق من</h3>
+					</div>
+				</div>
+
+				<div class="col-lg-12 col-sm-12">
+					<div class="box-2">
+						<div class="row">
+                            {% for favo in favos %}
+							<div class="col-lg-3 col-sm-6">
+								<div class="inter-icon">
+
+									 <i class="{{ favo.icon }}"></i>
+
+									<div class="desc-inter">
+										<h6>{{ favo.Issue }}</h6>
+									</div>
+								</div>
+							</div>
+                            {% endfor %}
+
+
+							<!-- Interests Item -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Service Row Start -->
+			<div class="row mt-100">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>خدمات</h3>
+					</div>
+				</div>
+            {% for service in services %}
+				<div class="col-lg-6 col-sm-6">
+					<div class="service box-1 mb-40">
+						<i class="{{ service.logo_service }}"></i>
+						<h4>{{ service.title_service }}</h4>
+						<p>{{ service.description_service }}</p>
+					</div>
+				</div>
+            {% endfor %}
+			</div>
+
+			<!-- Testimonial Row Start -->
+			<div class="row testimonial mt-60">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>دیدگاه مشتریان</h3>
+					</div>
+				</div>
+
+				<div class="owl-carousel owl-theme">
+                {% for opinino in opininos %}
+					<!-- Testimonail Item -->
+					<div class="testimonial-item">
+						<div class="media">
+                            {% thumbnail opinino.image_opinions "80x80"  crop='center' as im %}
+			  						<img alt="" src="{{ im.url }}">
+                            {% endthumbnail %}
+							<div class="content">
+								<h4>{{ opinino.name_opinions}}</h4>
+								<p>{{ opinino.service_user}}</p>
+							</div>
+{#							<ul class="rating">#}
+{#                                {% for star in stars %}#}
+{#                                  <li><i class="far fa-star"></i></li>#}
+{#                                {% endfor %}#}
+{#							</ul>#}
+						</div>
+						<div class="comment pt-30">
+							<p>
+								{{ opinino.description_opinions }}
+							</p>
+						</div>
+					</div>
+                {% endfor %}
+
+
+
+				</div>
+			</div>
+
+			<!-- Price Row Start -->
+			<div class="row mt-100 mb-60">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-90">
+						<h3>قیمت ها</h3>
+					</div>
+				</div>
+               {% for price in prices %}
+               				<!-- Price Item -->
+				<div class="col-lg-4 col-sm-12">
+					<div class="price box-1">
+						<div class="head-price">
+							<i class="{{ price.logo_prices }}"></i>
+							<h4>{{ price.title_prices }}</h4>
+						</div>
+						<div class="body-price">
+							<div class="price-plan">
+								<span class="period">{{ price.period }}</span>
+								<span class="number">{{ price.price }}</span>
+								<span class="currency">تومان</span>
+							</div>
+							<div class="list-price">
+								<ul>
+									<li>طراحی وب</li>
+									<li>توسعه وب</li>
+									<li class="disable">طراحی واکنشگرا</li>
+									<li class="disable">توسعه بازی</li>
+								</ul>
+							</div>
+						</div>
+						<div class="footer-price">
+							<a href="#" class="btn-st">هم اکنون بخرید</a>
+						</div>
+					</div>
+				</div>
+               {% endfor %}
+
+
+			</div>
+		</section>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+</html>
+{% elif rtl_fa == True %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Title -->
+	<title>taha</title>
+
+	<!-- CSS Plugins -->
+	<link rel="stylesheet" href="/static/css/plugins/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/font-awesome.css">
+	<link rel="stylesheet" href="/static/css/plugins/magnific-popup.css">
+	<link rel="stylesheet" href="/static/css/plugins/simplebar.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.carousel.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/jquery.animatedheadline.css">
+
+	<!-- CSS Base -->
+	<link rel="stylesheet" class="theme-st" href="/static/css/style-dark.css">
+
+	<!-- Settings Style -->
+	<link rel="stylesheet" class="pos-nav" href="/static/css/settings/left-nav.css">
+	<link rel="stylesheet" class="box-bd" href="/static/css/settings/box/box.css">
+	<link rel="stylesheet" class="box-st" href="/static/css/settings/box/circle.css">
+	<link rel="stylesheet" class="box-tl" href="/static/css/settings/title/title.css">
+	<link rel="stylesheet" class="style-cl" href="/static/css/settings/color/green-color.css">
+
+	<link rel="stylesheet" href="/static/setting/style-demo.css">
+
+	<!-- Icon and Color -->
+	<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png">
+	<meta name="theme-color" content="#0e0f10">
+
+</head>
+<body>
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+
+
+
+
+								<!-- About Section -->
+								<div class="page pt-about" data-simplebar>
+									<section class="container">
+
+										<!-- Section Title -->
+										<div class="header-page mt-70 mob-mt">
+											<h2>About Me</h2>
+											<span></span>
+										</div>
+
+										<!-- Personal Info Start -->
+										<div class="row mt-100">
+
+											<!-- Information Block -->
+											<div class="col-lg-12 col-sm-12">
+												<div class="info box-1">
+													<div class="row">
+														<div class="col-lg-3 col-sm-4">
+															<div class="photo">
+																{% thumbnail user.image "400x400" quality=50 crop='center' as im %}
+									                                    <img alt="" src="{{ im.url }}">
+                                                                {% endthumbnail %}
+															</div>
+														</div>
+														<div class="col-lg-9 col-sm-8">
+															<h4>{{ user.name|trans }}</h4>
+															<div class="loc">
+																<i class="fas fa-map-marked-alt"></i> {{ user.city|trans }},{{ user.country|trans }}
+															</div>
+															<p>{{ user.description|trans }}
+															</p>
+														</div>
+
+														<!-- Icon Info -->
+														<div class="col-lg-3 col-sm-4">
+                                                            <a href="{% url 'resume' %}"></a>
+															<div class="info-icon">
+																<i class="fas fa-award"></i>
+																<div class="desc-icon">
+																	<h6>{{ user.experience }}</h6>
+																	<p>Experience</p>
+																</div>
+															</div>
+														</div>
+
+														<!-- Icon Info -->
+														<div class="col-lg-3 col-sm-4">
+                                                            <a href="{% url 'portfolio' %}"></a>
+															<div class="info-icon">
+																<i class="fas fa-certificate"></i>
+																<div class="desc-icon">
+																	<h6>{{ user.finished }}</h6>
+																	<p>Completed</p>
+																</div>
+															</div>
+														</div>
+
+							<!-- Icon Info -->
+							<div class="col-lg-3 col-sm-4">
+                                <a href="{% url 'resume' %}">
+								<div class="info-icon">
+									<i class="fas fa-user-astronaut"></i>
+									<div class="desc-icon">
+										<h6>{{ user.condition.title_condition|trans }}</h6>
+										<p>Available</p>
+									</div>
+                                </div></a>
+							</div>
+							<div class="col-lg-3 col-sm-12 pt-50">
+								<a href="{{ user.resume.url }}" class="btn-st">Download CV</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Interests Row Start -->
+			<div class="row mt-100">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>My Interests</h3>
+					</div>
+				</div>
+
+				<div class="col-lg-12 col-sm-12">
+					<div class="box-2">
+						<div class="row">
+                            {% for favo in favos %}
+							<div class="col-lg-3 col-sm-6">
+								<div class="inter-icon">
+
+									 <i class="{{ favo.icon }}"></i>
+
+									<div class="desc-inter">
+										<h6>{{ favo.Issue|trans }}</h6>
+									</div>
+								</div>
+							</div>
+                            {% endfor %}
+
+
+							<!-- Interests Item -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Service Row Start -->
+			<div class="row mt-100">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>Services</h3>
+					</div>
+				</div>
+            {% for service in services %}
+				<div class="col-lg-6 col-sm-6">
+					<div class="service box-1 mb-40">
+						<i class="{{ service.logo_service }}"></i>
+						<h4>{{ service.title_service|trans }}</h4>
+						<p>{{ service.description_service|trans }}</p>
+					</div>
+				</div>
+            {% endfor %}
+			</div>
+
+			<!-- Testimonial Row Start -->
+			<div class="row testimonial mt-60">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>Testimonials</h3>
+					</div>
+				</div>
+
+				<div class="owl-carousel owl-theme">
+                {% for opinino in opininos %}
+					<!-- Testimonail Item -->
+					<div class="testimonial-item">
+						<div class="media">
+                            {% thumbnail opinino.image_opinions "80x80"  crop='center' as im %}
+			  						<img alt="" src="{{ im.url }}">
+                            {% endthumbnail %}
+							<div class="content">
+								<h4>{{ opinino.name_opinions.title|trans }}</h4>
+								<p>{{ opinino.service_user.title_service|trans }}</p>
+							</div>
+{#							<ul class="rating">#}
+{#                                {% for star in stars %}#}
+{#                                  <li><i class="far fa-star"></i></li>#}
+{#                                {% endfor %}#}
+{#							</ul>#}
+						</div>
+						<div class="comment pt-30">
+							<p>
+								{{ opinino.description_opinions|trans }}
+							</p>
+						</div>
+					</div>
+                {% endfor %}
+
+
+
+				</div>
+			</div>
+
+			<!-- Price Row Start -->
+			<div class="row mt-100 mb-60">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-90">
+						<h3>Price</h3>
+					</div>
+				</div>
+               {% for price in prices %}
+               				<!-- Price Item -->
+				<div class="col-lg-4 col-sm-12">
+					<div class="price box-1">
+						<div class="head-price">
+							<i class="{{ price.logo_prices }}"></i>
+							<h4>{{ price.title_prices|trans }}</h4>
+						</div>
+						<div class="body-price">
+							<div class="price-plan">
+								<span class="period">{{ price.period|trans }}</span>
+								<span class="number">{{ price.price }}</span>
+								<span class="currency">T</span>
+							</div>
+							<div class="list-price">
+								<ul>
+									<li>Web Design</li>
+									<li>Web Development</li>
+									<li class="disable">Responsive Design</li>
+									<li class="disable">Game Development</li>
+								</ul>
+							</div>
+						</div>
+						<div class="footer-price">
+							<a href="#" class="btn-st">Buy Now</a>
+						</div>
+					</div>
+				</div>
+               {% endfor %}
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+{% endif %}

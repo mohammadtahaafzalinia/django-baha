@@ -1,0 +1,72 @@
+{% load poll_extras %}
+{% if rtl_fa == False %}
+<div class="blog-comments mt-100 mb-100" id="comment_list">
+					<div class="header-box mb-50">
+						<h3>دیدگاه‌ها</h3>
+					</div>
+                        <ul>
+                            <li>
+
+                                    {% for comment in comments %}
+                                           <div class="comment-text">
+                                               {% if request.user.is_superuser %}
+                                                   <a  onclick="replace({{ comment.id }})"><i class="fas fa-reply"></i>پاسخ</a>
+                                               {% endif %}
+                                               <h4>{{ comment.user }}</h4>
+                                               <span>{{ comment.get_jalali_data }}  در {{ comment.get_jalali_time }}</span>
+                                               <p>{{ comment.text }}</p>
+                                           </div>
+                                           {% for replace_comment in comment.blog_comment_set.all %}
+                                               <ul>
+                                                   <li>
+                                                       <div class="comment-text">
+                                                           <a><i class="fas fa-reply"></i>{{ replace_comment.replace.user }}</a>
+                                                           <h4>{{ user.name }}</h4>
+                                                           <span>{{ replace_comment.get_jalali_data }}  در {{ replace_comment.get_jalali_time }}</span>
+                                                           <p>{{ replace_comment.text }}</p>
+                                                       </div>
+                                                   </li>
+                                               </ul>
+                                           {% endfor %}
+                                    {% endfor %}
+                            </li>
+
+                        </ul>
+
+                </div>
+{% elif rtl_fa == True %}
+<div class="blog-comments mt-100 mb-100" id="comment_list">
+					<div class="header-box mb-50">
+						<h3>Leave a comment</h3>
+					</div>
+                        <ul>
+                            <li>
+
+                                    {% for comment in comments %}
+                                           <div class="comment-text">
+                                               {% if request.user.is_superuser %}
+                                                   <a  onclick="replace({{ comment.id }})"><i class="fas fa-reply"></i>replay</a>
+                                               {% endif %}
+                                               <h4>{{ comment.user.title|trans }}</h4>
+                                               <span>{{ comment.create_date.date }}  in {{ comment.create_date.time}}</span>
+                                               <p>{{ comment.text }}</p>
+                                           </div>
+                                           {% for replace_comment in comment.blog_comment_set.all %}
+                                               <ul>
+                                                   <li>
+                                                       <div class="comment-text">
+                                                           <a><i class="fas fa-reply"></i>{{ replace_comment.replace.user }}</a>
+                                                           <h4>{{ user.name|trans }}</h4>
+                                                           <span>{{ replace_comment.create_date.date }}  در {{ replace_comment.create_date.time }}</span>
+                                                           <p>{{ replace_comment.text|trans }}</p>
+                                                       </div>
+                                                   </li>
+                                               </ul>
+                                           {% endfor %}
+                                    {% endfor %}
+                            </li>
+
+                        </ul>
+
+                </div>
+{% endif %}

@@ -1,0 +1,416 @@
+{% load thumbnail %}
+{% load render_partial %}
+{% load poll_extras %}
+{% if rtl_fa == False %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Title -->
+	<title>taha</title>
+
+	<!-- CSS Plugins -->
+	<link rel="stylesheet" href="/static/css/plugins/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/font-awesome.css">
+	<link rel="stylesheet" href="/static/css/plugins/magnific-popup.css">
+	<link rel="stylesheet" href="/static/css/plugins/simplebar.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.carousel.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/jquery.animatedheadline.css">
+
+	<!-- CSS Base -->
+	<link rel="stylesheet" class="theme-st" href="/static/css/style-dark.css">
+
+	<!-- Settings Style -->
+	<link rel="stylesheet" class="pos-nav" href="/static/css/settings/right-nav.css">
+	<link rel="stylesheet" class="box-st" href="/static/css/settings/box/circle.css">
+	<link rel="stylesheet" class="style-cl" href="/static/css/settings/color/green-color.css">
+
+	<link rel="stylesheet" href="/static/setting/style-demo.css">
+
+	<!-- Icon and Color -->
+	<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png">
+	<meta name="theme-color" content="#0e0f10">
+
+</head>
+
+<body>
+
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Home Section -->
+
+	<!--Blog Page-->
+	<div class="blog-list" data-simplebar>
+		<div class="blog-head">
+			<h2>بلاگ</h2>
+			<ul class="blog-breadcrumb">
+				<li><a href="{% url 'home' %}">خانه</a></li>
+				<li><a href="{% url 'blog' %}">بلاگ</a></li>
+			</ul>
+		</div>
+		<div class="row blog-list-container">
+			<div class="col-md-10 offset-md-1">
+				<div class="row">
+					<div class="col-md-8" id="search-results">
+                          {% for blog in blogs %}
+                           <!--Blog Post-->
+						<div class="blog-post" >
+							<div class="content">
+								<div class="thumbnail">
+									<a href="{% url 'blog_ditail' blog.slug %}">
+                                        {% thumbnail blog.image "492x370"  crop='center' as im %}
+                                                <img alt="" src="{{ im.url }}">
+                                        {% endthumbnail %}
+
+									</a>
+								</div>
+								<div class="detalis">
+									<ul class="meta">
+										<li><i class="fa fa-calendar"></i>{{ blog.get_jalali_data }}</li>
+										<li><a href="{% url 'about_modul' %}"><i class="icon fa fa-user"></i>{{ autor }}</a></li>
+									</ul>
+									<h4><a href="{% url 'blog_ditail' blog.slug  %}">{{ blog.title }}</a></h4>
+									<div class="text">{{ blog.list_description }}</div>
+									<a href="{% url 'blog_ditail' blog.slug %}" class="btn-st">مشاهده بیشتر</a>
+								</div>
+							</div>
+						</div>
+                          {% endfor %}
+
+
+
+
+
+
+
+						<!-- Pagination Blog -->
+						<ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li>
+								<a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-right"></i></a>
+							</li>
+                            {% endif %}
+                             {% for page in paginator.page_range %}
+                             <li><a href="?page={{ page }}{% if page_obj.number == page %}active{% endif %}">{{ page }}</a></li>
+                             {% endfor %}
+                            {% if page_obj.has_next %}
+							<li>
+								<a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-left"></i></a>
+							</li>
+                            {% endif %}
+
+						</ul>
+
+					</div>
+
+					<div class="col-md-4">
+						<div class="side-left">
+
+							<!-- Search -->
+							<form class="search" action="{% url 'blog_search' %}" method="GET">
+								<div class="input-group">
+									<div class="input-group-text">
+                                        <a type="submit"><i class="fas fa-search" aria-hidden="true"></i></a>
+									</div>
+									<input  id="search_blog" name="search" type="text" class="form-control" placeholder="جستجو ...">
+								</div>
+							</form>
+							<!-- Categories -->
+							<div class="categories">
+								<h4>دسته‌بندی ها</h4>
+								<ul>
+                                    {% for category in categorys %}
+                                        <li><a href="{% url 'blog_cat' category.url %}">{{ category.title_category }}</a></li>
+                                    {% endfor %}
+								</ul>
+							</div>
+							<!-- Gallery -->
+							<div class="gallery">
+								<h4>گالری</h4>
+								<ul>
+                                    {% for blog in blogs %}
+                                        {% thumbnail blog.image "500x500"  crop='center' as im %}
+                                                <li><a href="{% url 'blog_ditail' blog.slug %}"><img src="{{ im.url }}" alt=""></a></li>
+                                        {% endthumbnail %}
+
+                                    {% endfor %}
+
+
+
+
+								</ul>
+							</div>
+							<!-- Recent News -->
+							<div class="news">
+								<h4>اخبار جدید</h4>
+								<ul>
+                                    {% for new in news %}
+									<li>
+										<div class="mess-img">
+                                        {% thumbnail new.image "47x47"  crop='center' as im %}
+                                               <a href="{% url 'blog_ditail' new.slug %}"><img src="{{ im.url }}" alt=""></a>
+                                        {% endthumbnail %}
+										</div>
+										<div class="mess-info">
+											<h5><a href="{% url 'blog_ditail' new.slug %}">{{ new.title }}</a></h5>
+											<p><i class="fa fa-calendar"></i>{{ new.get_jalali_data }}</p>
+										</div>
+									</li>
+                                    {% endfor %}
+								</ul>
+							</div>
+
+
+
+							<!-- Archives -->
+{#							<div class="archives">#}
+{#								<h4>بایگانی</h4>#}
+{#								<ul>#}
+{#                                    {% for date in dates %}#}
+{##}
+{#                                        <li><a href="#">{{ date }}</a></li>#}
+{##}
+{##}
+{##}
+{#                                    {% endfor %}#}
+
+{##}
+{#									<li><a href="#">بهمن 1398</a></li>#}
+{#									<li><a href="#">دی 1398</a></li>#}
+{#								</ul>#}
+{#							</div>#}
+
+							<!-- Tags -->
+{#							<div class="tags">#}
+{#								<h4>برچسب ها</h4>#}
+{#								<ul>#}
+{#									<li><a href="#">سفارش</a></li>#}
+{#									<li><a href="#">کسب و کار</a></li>#}
+{#									<li><a href="#">فضای ابری</a></li>#}
+{#									<li><a href="#">هاستینگ</a></li>#}
+{#									<li><a href="#">زندگی</a></li>#}
+{#									<li><a href="#">تکنیک</a></li>#}
+{#								</ul>#}
+{#							</div>#}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+</html>
+{% elif rtl_fa == True %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible">
+
+	<!-- Title -->
+	<title>taha</title>
+
+	<!-- CSS Plugins -->
+	<link rel="stylesheet" href="/static/css/plugins/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/font-awesome.css">
+	<link rel="stylesheet" href="/static/css/plugins/magnific-popup.css">
+	<link rel="stylesheet" href="/static/css/plugins/simplebar.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.carousel.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/jquery.animatedheadline.css">
+
+	<!-- CSS Base -->
+	<link rel="stylesheet" class="theme-st" href="/static/css/style-dark.css">
+
+	<!-- Settings Style -->
+	<link rel="stylesheet" class="pos-nav" href="/static/css/settings/right-nav.css">
+	<link rel="stylesheet" class="box-bd" href="/static/css/settings/box/box.css">
+	<link rel="stylesheet" class="box-st" href="/static/css/settings/box/circle.css">
+	<link rel="stylesheet" class="box-tl" href="/static/css/settings/title/title.css">
+	<link rel="stylesheet" class="style-cl" href="/static/css/settings/color/green-color.css">
+
+	<link rel="stylesheet" href="/static/setting/style-demo.css">
+
+	<!-- Icon and Color -->
+	<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png">
+	<meta name="theme-color" content="#0e0f10">
+
+</head>
+<body>
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!--Blog Page-->
+	<!--Blog Page-->
+	<div class="blog-list" data-simplebar>
+		<div class="blog-head">
+			<h2>Blog List</h2>
+			<ul class="blog-breadcrumb">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'blog' %}">Blog<a></a></li>
+			</ul>
+		</div>
+		<div class="row blog-list-container">
+			<div class="col-md-10 offset-md-1">
+				<div class="row">
+					<div class="col-md-8" id="search-results">
+                          {% for blog in blogs %}
+                           <!--Blog Post-->
+						<div class="blog-post" >
+							<div class="content">
+								<div class="thumbnail">
+									<a href="{% url 'blog_ditail' blog.slug %}">
+                                        {% thumbnail blog.image "492x370"  crop='center' as im %}
+                                                <img alt="" src="{{ im.url }}">
+                                        {% endthumbnail %}
+
+									</a>
+								</div>
+								<div class="detalis">
+									<ul class="meta">
+										<li><i class="fa fa-calendar"></i>{{ blog.date }}</li>
+										<li><a href="{% url 'about_modul' %}"><i class="icon fa fa-user"></i>{{ autor.title|trans }}</a></li>
+									</ul>
+									<h4><a href="{% url 'blog_ditail' blog.slug  %}">{{ blog.title|trans }}</a></h4>
+									<div class="text">{{ blog.list_description|trans }}</div>
+									<a href="{% url 'blog_ditail' blog.slug %}" class="btn-st">view more</a>
+								</div>
+							</div>
+						</div>
+                          {% endfor %}
+
+						<!-- Pagination Blog -->
+						<ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li>
+								<a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-right"></i></a>
+							</li>
+                            {% endif %}
+                             {% for page in paginator.page_range %}
+                             <li><a href="?page={{ page }}{% if page_obj.number == page %}active{% endif %}">{{ page }}</a></li>
+                             {% endfor %}
+                            {% if page_obj.has_next %}
+							<li>
+								<a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-left"></i></a>
+							</li>
+                            {% endif %}
+						</ul>
+
+					</div>
+
+					<div class="col-md-4">
+						<div class="side-left">
+
+							<!-- Search -->
+							<form class="search" action="{% url 'blog_search' %}" method="GET">
+								<div class="input-group">
+									<div class="input-group-text">
+										<a type="submit"><i class="fas fa-search" aria-hidden="true"></i></a>
+									</div>
+									<input id="search_blog" name="search" type="text" class="form-control" placeholder="search here...">
+								</div>
+							</form>
+							<!-- Categories -->
+							<div class="categories">
+								<h4>Categories</h4>
+								<ul>
+									{% for category in categorys %}
+                                        <li><a href="{% url 'blog_cat' category.url %}">{{ category.title_category|trans }}</a></li>
+                                    {% endfor %}
+								</ul>
+							</div>
+
+							<!-- Recent News -->
+							<div class="news">
+								<h4>Recent News</h4>
+								<ul>
+									{% for new in news %}
+									<li>
+										<div class="mess-img">
+                                        {% thumbnail new.image "47x47"  crop='center' as im %}
+                                               <a href="{% url 'blog_ditail' new.slug %}"><img src="{{ im.url }}" alt=""></a>
+                                        {% endthumbnail %}
+										</div>
+										<div class="mess-info">
+											<h5><a href="{% url 'blog_ditail' new.slug %}">{{ new.title|trans }}</a></h5>
+											<p><i class="fa fa-calendar"></i>{{ new.date }}</p>
+										</div>
+									</li>
+                                    {% endfor %}
+								</ul>
+							</div>
+
+							<!-- Gallery -->
+							<div class="gallery">
+								<h4>Gallery</h4>
+								<ul>
+                                    {% for blog in blogs %}
+                                        {% thumbnail blog.image "500x500"  crop='center' as im %}
+                                                <li><a href="{% url 'blog_ditail' blog.slug %}"><img src="{{ im.url }}" alt=""></a></li>
+                                        {% endthumbnail %}
+
+                                    {% endfor %}
+
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+{% endif %}

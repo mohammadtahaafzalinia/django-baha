@@ -1,0 +1,124 @@
+<link rel="stylesheet" href="/static/css/video-iframe.css">
+{% if rtl_fa == False %}
+<nav class="header-main" data-simplebar>
+
+		<!-- Logo -->
+		<div class="logo">
+			<img src="/static/img/logo.png" alt="">
+		</div>
+
+		<ul>
+			<li data-tooltip="خانه" data-position="top">
+				<a href="{% url 'home' %}" class="icon-h fas fa-house-damage" {% if request.resolver_match.url_name == 'home' %}id="active_icon"{% endif %}></a>
+			</li>
+			<li data-tooltip="درباره" data-position="top">
+				<a href="{% url 'about_modul' %}" class="icon-a fas fa-user-tie" {% if request.resolver_match.url_name == 'about_modul' %}id="active_icon"{% endif %}></a>
+			</li>
+            <li data-tooltip="رزومه" data-position="top">
+				<a href="{% url 'resume' %}" class="icon-r fas fa-address-book" {% if request.resolver_match.url_name == 'resume' %}id="active_icon"{% endif %}></a>
+			</li>
+			<li data-tooltip="نمونه‌کارها" data-position="top">
+				<a href="{% url 'portfolio' %}" class="icon-p fas fa-briefcase" {% if request.resolver_match.url_name == 'portfolio' %}id="active_icon"{% endif %}></a>
+			</li>
+			<li data-tooltip="بلاگ" data-position="top">
+				<a href="{% url 'blog' %}" class="icon-b fas fa-receipt" {% if request.resolver_match.url_name == 'blog' %}id="active_icon"{% endif %}></a>
+			</li>
+			<li data-tooltip="تماس" data-position="bottom">
+				<a href="{% url 'contact_modul' %}" class="icon-c fas fa-envelope" {% if request.resolver_match.url_name == 'contact_modul' %}id="active_icon"{% endif %}></a>
+			</li>
+		</ul>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- Sound wave -->
+		<a class="music-bg" id="toggleMusicButton">
+			<div class="lines">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<p>صدا</p>
+    <script>
+    var audio = new Audio("{% url 'play_music' %}");
+    var isPlaying = false;
+
+    $('#toggleMusicButton').click(function() {
+        if (isPlaying) {
+            audio.play();
+            isPlaying = false;
+            $('#toggleMusicButton');
+
+        } else {
+            audio.pause();
+            isPlaying = true;
+            $('#toggleMusicButton');
+        }
+    });
+    </script>
+		</a>
+
+	</nav>
+
+{% elif rtl_fa == True %}
+<nav class="header-main" data-simplebar style="margin-right: 90%;">
+
+		<!-- Logo -->
+		<div class="logo">
+			<img src="/static/img/logo.png" alt="">
+		</div>
+
+		<ul>
+			<li data-tooltip="home" data-position="top">
+				<a href="{% url 'home' %}" class="icon-h fas fa-house-damage" {% if request.resolver_match.url_name == 'home' %}id="active_icon"{% endif %}></a>
+			</li>
+			<li data-tooltip="about" data-position="top">
+				<a href="{% url 'about_modul' %}" class="icon-a fas fa-user-tie" {% if request.resolver_match.url_name == 'about_modul' %}id="active_icon"{% endif %}></a>
+			</li>
+            <li data-tooltip="resume" data-position="top">
+				<a href="{% url 'resume' %}" class="icon-r fas fa-address-book" {% if request.resolver_match.url_name == 'resume' %}id="active_icon"{% endif %}></a>
+			</li>
+			<li data-tooltip="portfolio" data-position="top">
+				<a href="{% url 'portfolio' %}" class="icon-p fas fa-briefcase" {% if request.resolver_match.url_name == 'portfolio' %}id="active_icon"{% endif %}></a>
+			</li>
+			<li data-tooltip="blog" data-position="top">
+				<a href="{% url 'blog' %}" class="icon-b fas fa-receipt" {% if request.resolver_match.url_name == 'blog' %}id="active_icon"{% endif %}></a>
+			</li>
+			<li data-tooltip="contact" data-position="bottom">
+				<a href="{% url 'contact_modul' %}" class="icon-c fas fa-envelope" {% if request.resolver_match.url_name == 'contact_modul' %}id="active_icon"{% endif %}></a>
+			</li>
+		</ul>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- Sound wave -->
+		<a class="music-bg" id="toggleMusicButton">
+			<div class="lines">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<p>sound</p>
+    <script>
+    var audio = new Audio("{% url 'play_music' %}");
+    var isPlaying = false;
+
+    $('#toggleMusicButton').click(function() {
+        if (isPlaying) {
+            audio.play();
+            isPlaying = false;
+            $('#toggleMusicButton');
+
+        } else {
+            audio.pause();
+            isPlaying = true;
+            $('#toggleMusicButton');
+        }
+    });
+    </script>
+		</a>
+
+	</nav>
+{% endif %}
+

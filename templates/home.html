@@ -1,0 +1,153 @@
+{#{% if rtl_fa == False %}#}
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+     {% render_partial 'link' %}
+
+<body>
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+
+	<!-- Home Section -->
+
+<div class="pt-home">
+
+		<div class="addition-bg">
+
+			<!-- Html Video -->
+			<div class="html-video-container" data-vide-bg="/static/video/baha.mp4"></div>
+		</div>
+
+		<section>
+
+			<!-- Banner -->
+			<div class="banner">
+				<h1>{{ user.name }}</h1>
+				<p class="cd-headline rotate-1">
+					<span class="cd-words-wrapper">
+						<b class="is-visible">توسعه دهنده</b>
+						<b>طراح</b>
+						<b>فریلنسر</b>
+                        <b>بک اند</b>
+					</span>
+				</p>
+			</div>
+
+			<!-- Language -->
+{#			<div class="lang">#}
+{#				<ul>#}
+{#					<li><a href="{% url 'home_lan' code=False %}" class="{% if user.language == False %}active{% endif %}">فارسی</a></li>#}
+{#					<li><a href="{% url 'home_lan' code=True %}" class="{% if user.language == True %}active{% endif %}">انگلیسی</a></li>#}
+{#				</ul>#}
+{#			</div>#}
+
+
+			<!-- Social -->
+			<div class="social">
+				<ul>
+					<li><a href="{{ user.facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+					<li><a href="{{ user.twitter }}"><i class="fab fa-twitter"></i></a></li>
+					<li><a href="{{ user.instagram }}"><i class="fab fa-instagram"></i></a></li>
+					<li><a href="{{ user.youtube }}"><i class="fab fa-youtube"></i></a></li>
+				</ul>
+			</div>
+		</section>
+	</div>
+
+	<!-- All Script -->
+    {% render_partial 'js' %}
+
+</body>
+
+</html>
+{#{% elif rtl_fa == True %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#{% render_partial 'link' %}#}
+{#<body>#}
+{#    {% render_partial 'theme' %}#}
+{#	<!-- Preloader -->#}
+{#    {% render_partial 'preloader' %}#}
+{#	<!-- Main Site -->#}
+{#    {% render_partial 'main_site' %}#}
+{#	<!-- Left Block -->#}
+{#	{% render_partial 'menu' %}#}
+{##}
+{##}
+{#							<!-- Home Section -->#}
+{#							<div class="pt-home">#}
+{##}
+{#								<div class="addition-bg">#}
+{##}
+{#									<!-- Html Video -->#}
+{#									<div class="html-video-container" data-vide-bg="/static/video/baha.mp4"></div>#}
+{#								</div>#}
+{##}
+{#								<section>#}
+{##}
+{#									<!-- Banner -->#}
+{#									<div class="banner">#}
+{#										<h1>{{ user.en_name }}</h1>#}
+{#										<p class="cd-headline rotate-1">#}
+{#											<span class="cd-words-wrapper">#}
+{#												<b class="is-visible">Developer</b>#}
+{#												<b>Photographer</b>#}
+{#												<b>Designer</b>#}
+{#												<b>Freelancer</b>#}
+{#												<b>Backend</b>#}
+{#											</span>#}
+{#										</p>#}
+{#									</div>#}
+{##}
+{#									<!-- Language -->#}
+{#			<div class="lang">#}
+{#				<ul>#}
+{#					<li><a href="{% url 'home_lan' code=False %}" class="{% if rtl_fa == False %}active{% endif %}">persian</a></li>#}
+{#					<li><a href="{% url 'home_lan' code=True %}" class="{% if rtl_fa == True %}active{% endif %}">english</a></li>#}
+{#				</ul>#}
+{#			</div>#}
+{##}
+{#									<!-- Social -->#}
+{#									<div class="social">#}
+{#										<ul>#}
+{#											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>#}
+{#											<li><a href="#"><i class="fab fa-twitter"></i></a></li>#}
+{#											<li><a href="#"><i class="fab fa-instagram"></i></a></li>#}
+{#											<li><a href="#"><i class="fab fa-youtube"></i></a></li>#}
+{#										</ul>#}
+{#									</div>#}
+{#								</section>#}
+{#							</div>#}
+{##}
+{##}
+{##}
+{#	<!-- All Script -->#}
+{#	<script src="/static/js/jquery.min.js"></script>#}
+{#	<script src="/static/js/isotope.pkgd.min.js"></script>#}
+{#	<script src="/static/js/bootstrap.min.js"></script>#}
+{#	<script src="/static/js/simplebar.js"></script>#}
+{#	<script src="/static/js/owl.carousel.min.js"></script>#}
+{#	<script src="/static/js/jquery.magnific-popup.min.js"></script>#}
+{#	<script src="/static/js/jquery.animatedheadline.min.js"></script>#}
+{#	<script src="/static/js/jquery.easypiechart.js"></script>#}
+{#	<script src="/static/js/jquery.validation.js"></script>#}
+{#	<script src="/static/js/tilt.js"></script>#}
+{#	<script src="/static/js/main.js"></script>#}
+{#	<script src="https://maps.google.com/maps/api/js?sensor=false"></script>#}
+{##}
+{#	<!-- Page Script -->#}
+{#	<script src="/static/js/vide.js"></script>#}
+{##}
+{##}
+{##}
+{#    <script src="/static/setting/main-demo.js"></script>#}
+{#</body>#}
+{##}
+{#</html>#}
+{#{% endif %}#}

@@ -1,0 +1,256 @@
+{% load easy_maps_tags %}
+{% load render_partial %}
+{% load poll_extras %}
+{% if rtl_fa == False %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+{% render_partial 'link' %}
+<body>
+
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Home Section -->
+
+	<!-- Contact Section -->
+	<div class="page pt-contact" data-simplebar>
+		<section class="container">
+
+			<!-- Section Title -->
+			<div class="header-page mt-70 mob-mt">
+				<h2>تماس</h2>
+				<span></span>
+			</div>
+
+			<!-- Form Start -->
+			<div class="row mt-100">
+				<div class="col-lg-12 col-sm-12">
+					<div class="contact-form">
+						<form class="box-1 contact-valid " action="{% url 'contact_modul' %}" method="post">
+                            {% csrf_token %}
+							<div class="row">
+                                <div class="col-lg-6 col-sm-12">
+                                    {{ form.name }}
+								</div>
+								<div class="col-lg-6 col-sm-12 mt-3 mt-lg-0">
+									{{ form.email_contact }}
+								</div>
+								<div class="col-lg-12 col-sm-12">
+									{{ form.text }}
+								</div>
+                                <div class="col-lg-6 col-sm-12" style="margin-left: 0%;margin-right: 34%;">
+                                    {{ form.captcha }}
+								</div>
+								<div class="col-lg-12 col-sm-12 text-center">
+									<button id="btn-sweet" type="submit" class="btn-st" style="margin-top: 4.5%;" >ارسال پیام</button>
+                                    <script>
+                                        document.querySelector("#btn-sweet").addEventListener("click",function (){
+                                            Swal.fire({
+                                                  title: 'Error!',
+                                                  text: 'Do you want to continue',
+                                                  icon: 'error',
+                                                  confirmButtonText: 'Cool'
+                                                })
+                                        })
+                                    </script>
+
+									<div id="loader">
+										<i class="fas fa-sync"></i>
+									</div>
+                                </div>
+                            </div>
+						</form>
+{#								<div class="col-lg-12 col-sm-12">#}
+{#									<div class="error-messages">#}
+{#										<div id="success">#}
+{#											<i class="far fa-check-circle"></i>متشکریم، پیام شما ارسال شد.#}
+{#										</div>#}
+{#										<div id="error">#}
+{#											<i class="far fa-times-circle"></i>#}
+{#										</div>#}
+{#									</div>#}
+{#								</div>#}
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Contact Info -->
+			<div class="box-2 contact-info">
+				<div class="row">
+					<div class="col-lg-4 col-sm-12 info">
+						<i class="fas fa-paper-plane"></i>
+						<p>{{ contact.email }}</p>
+						<span>ایمیل</span>
+					</div>
+					<div class="col-lg-4 col-sm-12 info">
+						<i class="fas fa-map-marker-alt"></i>
+						<p>{{ contact.address }}</p>
+						<span>آدرس</span>
+					</div>
+					<div class="col-lg-4 col-sm-12 info">
+						<i class="fas fa-phone"></i>
+						<p><span class="ltr-text">{{ contact.phone }}</span></p>
+						<span>تلفن</span>
+					</div>
+				</div>
+			</div>
+
+			<!--Google Map Start-->
+			<div class="google-map box-1 mt-100 mb-100">
+				<div class="row">
+					<div class="col-lg-12">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d25747.804176478036!2d57.67407500000001!3d36.227941!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1695233724176!5m2!1sen!2sus" width="1050" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+	<script src="https://maps.google.com/maps/api/js?key=AIzaSyAEn4c_T1rFt7ltf_oNavnjND8dDPm4KQs&language=fa"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+
+</html>
+{% elif rtl_fa == True %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% render_partial 'link' %}
+
+<body>
+
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Home Section -->
+
+	<!-- Contact Section -->
+	<div class="page pt-contact" data-simplebar>
+		<section class="container">
+
+			<!-- Section Title -->
+			<div class="header-page mt-70 mob-mt">
+				<h2>contact</h2>
+				<span></span>
+			</div>
+
+			<!-- Form Start -->
+			<div class="row mt-100">
+				<div class="col-lg-12 col-sm-12">
+					<div class="contact-form">
+						<form class="box-1 contact-valid" action="{% url 'contact_modul' %}" method="post">
+                            {% csrf_token %}
+							<div class="row">
+								<div class="col-lg-6 col-sm-12">
+                                    {{ form.name }}
+								</div>
+								<div class="col-lg-6 col-sm-12 mt-3 mt-lg-0">
+									{{ form.email_contact }}
+								</div>
+								<div class="col-lg-12 col-sm-12">
+									{{ form.text }}
+								</div>
+                                <div class="col-lg-6 col-sm-12" style="margin-right: 15%;">
+                                    {{ form.captcha }}
+								</div>
+								<div class="col-lg-12 col-sm-12 text-center" style="margin-top: 4.5%">
+									<button type="submit" class="btn-st" > send message</button>
+{#									<div id="loader">#}
+{#										<i class="fas fa-sync"></i>#}
+{#									</div>#}
+                                </div>
+                            </div>
+						</form>
+{#								<div class="col-lg-12 col-sm-12">#}
+{#									<div class="error-messages">#}
+{#										<div id="success">#}
+{#											<i class="far fa-check-circle"></i>متشکریم، پیام شما ارسال شد.#}
+{#										</div>#}
+{#										<div id="error">#}
+{#											<i class="far fa-times-circle"></i>#}
+{#										</div>#}
+{#									</div>#}
+{#								</div>#}
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Contact Info -->
+			<div class="box-2 contact-info">
+				<div class="row">
+					<div class="col-lg-4 col-sm-12 info">
+						<i class="fas fa-paper-plane"></i>
+						<p>{{ contact.email }}</p>
+						<span>email</span>
+					</div>
+					<div class="col-lg-4 col-sm-12 info">
+						<i class="fas fa-map-marker-alt"></i>
+						<p>{{ contact.address|cut:'6'|trans}}</p>
+						<span>address</span>
+					</div>
+					<div class="col-lg-4 col-sm-12 info">
+						<i class="fas fa-phone"></i>
+						<p><span class="ltr-text">{{ contact.phone }}</span></p>
+						<span>phone</span>
+					</div>
+				</div>
+			</div>
+
+			<!--Google Map Start-->
+			<div class="google-map box-1 mt-100 mb-100">
+				<div class="row">
+					<div class="col-lg-12">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d25747.804176478036!2d57.67407500000001!3d36.227941!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1695233724176!5m2!1sen!2sus" width="1050" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+	<script src="https://maps.google.com/maps/api/js?key=AIzaSyAEn4c_T1rFt7ltf_oNavnjND8dDPm4KQs&language=fa"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+
+</html>
+{% endif %}

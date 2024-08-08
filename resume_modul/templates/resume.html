@@ -1,0 +1,394 @@
+{% load render_partial %}
+{% load poll_extras %}
+{% if rtl_fa == False %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible">
+
+	<!-- Title -->
+	<title>taha</title>
+
+	<!-- CSS Plugins -->
+	<link rel="stylesheet" href="/static/css/plugins/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/font-awesome.css">
+	<link rel="stylesheet" href="/static/css/plugins/magnific-popup.css">
+	<link rel="stylesheet" href="/static/css/plugins/simplebar.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.carousel.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/static/css/plugins/jquery.animatedheadline.css">
+
+	<!-- CSS Base -->
+	<link rel="stylesheet" class="theme-st" href="/static/css/style-dark.css">
+
+	<!-- Settings Style -->
+	<link rel="stylesheet" class="pos-nav" href="/static/css/settings/right-nav.css">
+	<link rel="stylesheet" class="box-bd" href="/static/css/settings/box/box.css">
+	<link rel="stylesheet" class="box-st" href="/static/css/settings/box/circle.css">
+	<link rel="stylesheet" class="box-tl" href="/static/css/settings/title/title.css">
+	<link rel="stylesheet" class="style-cl" href="/static/css/settings/color/green-color.css">
+
+	<link rel="stylesheet" href="/static/setting/style-demo.css">
+
+	<!-- Icon and Color -->
+	<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png">
+	<meta name="theme-color" content="#0e0f10">
+
+</head>
+
+<body>
+
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Resume Section -->
+	<div class="page pt-resume" data-simplebar>
+		<section class="container">
+
+			<!-- Section Title -->
+			<div class="header-page mt-70 mob-mt">
+				<h2>رزومه</h2>
+				<span></span>
+			</div>
+
+			<!-- Experience & Education Row Start -->
+			<div class="row mt-100">
+
+				<!-- Experience Column Start -->
+				<div class="col-lg-6 col-sm-12">
+
+					<!-- Header Block -->
+					<div class="header-box mb-50">
+						<h3>سوابق کاری</h3>
+					</div>
+
+					<div class="experience box-1">
+
+						<!-- Experience Item -->
+                        {% for resume in resumes %}
+						<div class="item">
+							<div class="main">
+								<h4>{{ resume.work }}</h4>
+								<p><i class="far fa-calendar-alt"></i>{{ resume.get_jalali_start_time }}-{{ resume.get_jalali_end_time }} | {{ resume.company }}</p>
+							</div>
+							<p>{{ resume.description }}</p>
+						</div>
+                        {% endfor %}
+
+
+
+
+					</div>
+				</div>
+
+				<!-- Education Column Start -->
+				<div class="col-lg-6 col-sm-12">
+
+					<!-- Header Block -->
+					<div class="header-box mb-50 mob-box-mt">
+						<h3>سوابق تحصیلی</h3>
+					</div>
+
+					<div class="experience box-2">
+
+						<!-- Education Item -->
+                        {% for resume_ed in resume_eds %}
+						<div class="item">
+							<div class="main">
+								<h4>{{ resume_ed.section }}</h4>
+								<p><i class="far fa-calendar-alt"></i>{{ resume_ed.get_jalali_start_time }}-{{ resume_ed.get_jalali_end_time }} | {{ resume_ed.field_study }}</p>
+							</div>
+							<p>{{ resume_ed.description }}</p>
+						</div>
+                        {% endfor %}
+
+
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Skills Row Start -->
+			<div class="row mt-100">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>مهارت ها</h3>
+					</div>
+				</div>
+			</div>
+
+			<div class="box-1 skills">
+				<div class="row">
+					<div class="col-md-6">
+                        <!-- Skill Item -->
+                        {% for skill in skills %}
+                            {% if skill.type_skill == 'linear' %}
+                            <div class="skill-item">
+                                <h4 class="progress-title">{{ skill.skill_name }}</h4>
+                                <div class="progress">
+                                    <div class="progress-bar"  style="background-color:{{ skill.color }}!important;width:{{ skill.percent }}%;">
+                                        <div class="progress-value">{{ skill.percent }}%</div>
+                                    </div>
+                                </div>
+						    </div>
+                            {% endif %}
+
+                        {% endfor %}
+
+
+
+
+					</div>
+
+					<div class="col-md-6">
+						<div class="row">
+							<!-- Skill Item -->
+                           {% for skill in skills %}
+                               {% if skill.type_skill == 'circle' %}
+                                    <div class="col-lg-6 col-sm-6 skill-chart">
+                                        <div class="chart" data-percent="{{ skill.percent }}" data-bar-color="{{ skill.color }}"> {{ skill.percent }}% <p>{{ skill.skill_name }}</p>
+                                        </div>
+                                    </div>
+                               {% endif %}
+                           {% endfor %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Work Process Row Start -->
+			<div class="row mt-100">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>پروسه کاری من</h3>
+					</div>
+				</div>
+                {% for service in works %}
+                      <div class="col-lg-6 col-sm-6">
+                            <div class="service box-1 mb-40">
+                                <i>{{ service.number_work}}</i>
+                                <h4>{{ service.title }}</h4>
+                                <p>{{ service.description }}</p>
+                            </div>
+                      </div>
+                {% endfor %}
+			</div>
+
+
+
+
+		</section>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+</html>
+
+{% elif rtl_fa == True %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% render_partial 'link' %}
+
+<body>
+
+    {% render_partial 'theme' %}
+	<!-- Preloader -->
+    {% render_partial 'preloader' %}
+	<!-- Main Site -->
+    {% render_partial 'main_site' %}
+	<!-- Left Block -->
+	{% render_partial 'menu' %}
+	<!-- Resume Section -->
+	<div class="page pt-resume" data-simplebar>
+		<section class="container">
+
+			<!-- Section Title -->
+			<div class="header-page mt-70 mob-mt">
+				<h2>resume</h2>
+				<span></span>
+			</div>
+
+			<!-- Experience & Education Row Start -->
+			<div class="row mt-100">
+
+				<!-- Experience Column Start -->
+				<div class="col-lg-6 col-sm-12">
+
+					<!-- Header Block -->
+					<div class="header-box mb-50">
+						<h3>resume</h3>
+					</div>
+
+					<div class="experience box-1">
+
+						<!-- Experience Item -->
+                        {% for resume in resumes %}
+						<div class="item">
+							<div class="main">
+								<h4>{{ resume.work.title|trans }}</h4>
+								<p><i class="far fa-calendar-alt"></i>{{ resume.start_time }}-{{ resume.end_time }} | {{ resume.company|trans }}</p>
+							</div>
+							<p>{{ resume.description.title|trans }}</p>
+						</div>
+                        {% endfor %}
+
+
+
+
+					</div>
+				</div>
+
+				<!-- Education Column Start -->
+				<div class="col-lg-6 col-sm-12">
+
+					<!-- Header Block -->
+					<div class="header-box mb-50 mob-box-mt">
+						<h3>educational records</h3>
+					</div>
+
+					<div class="experience box-2">
+
+						<!-- Education Item -->
+                        {% for resume_ed in resume_eds %}
+						<div class="item">
+							<div class="main">
+								<h4>{{ resume_ed.section.title|trans }}</h4>
+								<p><i class="far fa-calendar-alt"></i>{{ resume_ed.start_time }}-{{ resume_ed.end_time }} | {{ resume_ed.field_study.title|trans }}</p>
+							</div>
+							<p>{{ resume_ed.description.title|trans }}</p>
+						</div>
+                        {% endfor %}
+
+
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Skills Row Start -->
+			<div class="row mt-100">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>skills</h3>
+					</div>
+				</div>
+			</div>
+
+			<div class="box-1 skills">
+				<div class="row">
+					<div class="col-md-6">
+                        <!-- Skill Item -->
+                        {% for skill in skills %}
+                            {% if skill.type_skill == 'linear' %}
+                            <div class="skill-item">
+                                <h4 class="progress-title">{{ skill.skill_name.title|trans }}</h4>
+                                <div class="progress">
+                                    <div class="progress-bar"  style="background-color:{{ skill.color }}!important;width:{{ skill.percent }}%;">
+                                        <div class="progress-value">{{ skill.percent }}%</div>
+                                    </div>
+                                </div>
+						    </div>
+                            {% endif %}
+
+                        {% endfor %}
+
+
+
+
+					</div>
+
+					<div class="col-md-6">
+						<div class="row">
+							<!-- Skill Item -->
+                           {% for skill in skills %}
+                               {% if skill.type_skill == 'circle' %}
+                                    <div class="col-lg-6 col-sm-6 skill-chart">
+                                        <div class="chart" data-percent="{{ skill.percent }}" data-bar-color="{{ skill.color }}"> {{ skill.percent }}% <p>{{ skill.skill_name.title|trans }}</p>
+                                        </div>
+                                    </div>
+                               {% endif %}
+                           {% endfor %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Work Process Row Start -->
+			<div class="row mt-100">
+
+				<!-- Header Block -->
+				<div class="col-md-12">
+					<div class="header-box mb-50">
+						<h3>my work process</h3>
+					</div>
+				</div>
+                {% for service in works %}
+                      <div class="col-lg-6 col-sm-6">
+                            <div class="service box-1 mb-40">
+                                <i>{{ service.number_work}}</i>
+                                <h4>{{ service.title|trans }}</h4>
+                                <p>{{ service.description.title|trans }}</p>
+                            </div>
+                      </div>
+                {% endfor %}
+			</div>
+
+
+
+
+		</section>
+	</div>
+
+	<!-- All Script -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/isotope.pkgd.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/simplebar.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.animatedheadline.min.js"></script>
+	<script src="/static/js/jquery.easypiechart.js"></script>
+	<script src="/static/js/jquery.validation.js"></script>
+	<script src="/static/js/tilt.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/setting/main-demo.js"></script>
+
+</body>
+
+</html>
+{% endif %}
